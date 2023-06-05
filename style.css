@@ -1,0 +1,206 @@
+@keyframes mainMenu {
+  50% {
+    transform: scale(0.75);
+  }
+  100% {
+    transform: scale(4);
+  }
+}
+
+:root {
+  --green: hsl(120, 100%, 30%);
+  --dark-green: hsl(120, 100%, 20%);
+  --brown: hsl(20, 40%, 40%);
+  --dark-brown: hsl(20, 40%, 30%);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: Outfit, sans-serif;
+}
+
+html,
+body {
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--green);
+}
+
+.screen {
+  width: 100vw;
+  height: 100vh;
+}
+
+.main-menu {
+  position: fixed;
+  display: flex;
+  gap: 2em;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.main-menu.animate {
+  animation-name: mainMenu;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+.main-menu__heading {
+  text-shadow: 0 0 3px white;
+  color: white;
+  font-size: 6em;
+  font-family: "Luckiest Guy", Outfit, sans-serif;
+}
+
+.main-menu__start-btn {
+  font-weight: bold;
+  color: white;
+  border-radius: 100vh;
+  padding: 0.5em 2.5em;
+  font-size: 2.5em;
+  background-color: var(--brown);
+  cursor: pointer;
+  transition: transform 250ms, box-shadow 250ms;
+}
+
+.main-menu__start-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 8px 2px rgba(0 0 0 / 0.3);
+}
+
+.farmland {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  padding-left: 20%;
+  background-color: var(--dark-brown);
+}
+
+.grid {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.plot {
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: filter 250ms;
+  background-color: var(--clr);
+}
+
+.plot:empty:nth-of-type(2n) {
+  --clr: var(--green);
+}
+
+.plot:empty:nth-of-type(2n + 1) {
+  --clr: var(--dark-green);
+}
+
+.plot:nth-of-type(2n) {
+  --clr: var(--brown);
+}
+
+.plot:nth-of-type(2n + 1) {
+  --clr: var(--dark-brown);
+}
+
+.plot:hover {
+  filter: brightness(115%);
+}
+
+.game {
+  display: none;
+}
+
+.shop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  padding: 1em 0;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: white rgba(0 0 0 / 0);
+}
+
+.shop::-webkit-scrollbar {
+  width: 5px;
+}
+
+.shop::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 100vh;
+}
+
+.shop > * {
+  background-color: rgba(0 0 0 / 0.3);
+  margin: 0 auto;
+  width: 60%;
+  padding: 0.5em;
+  color: white;
+  font-size: 1.1em;
+  display: flex;
+  align-items: center;
+}
+
+.money {
+  gap: 0.5em;
+  border-radius: 100vh;
+  margin-bottom: 2em;
+}
+
+.shop__item {
+  gap: 0.25em;
+  flex-direction: column;
+  border-radius: 0.5em;
+  cursor: pointer;
+  transition: transform 100ms, box-shadow 100ms;
+}
+
+.shop__item:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 5px 1px rgba(0 0 0 / 0.3);
+}
+
+.shop__item__img {
+  border-radius: 0.5em;
+  width: 50%;
+  aspect-ratio: 1;
+}
+
+.shop__item__price {
+  font-size: 1.1em;
+  text-shadow: 0 0 1px white;
+}
+
+.shop__item__price::before {
+  content: "$";
+}
+
+.cursor-follow-item {
+  position: fixed;
+  transform: translate(-50%, -50%) scale(1.5);
+  pointer-events: none;
+}
+
+.plant {
+  opacity: 0.5;
+}
+
+.plant.grown {
+  opacity: 1;
+  transform: scale(2) translateY(-50%);
+}
